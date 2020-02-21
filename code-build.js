@@ -56,7 +56,7 @@ async function waitForBuildEndTime(sdk, { id, logs }, nextToken) {
   const { nextForwardToken, events = [] } = cloudWatch;
 
   // stdout the CloudWatchLog (everyone likes progress...)
-  events.forEach(({ message }) => process.stdout.write(message));
+  events.forEach(({ message }) => message.length > 3 ? process.stdout.write(message) : null);
 
   // We did it! We can stop looking!
   if (current.endTime && !events.length) return current;
